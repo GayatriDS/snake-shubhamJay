@@ -23,5 +23,19 @@ Snake.prototype={
   },
   turnRight:function() {
     this.head=this.head.turnRight();
+  },
+  getHeadXCoord : function(){
+    return this.head.getCoord()[0];
+  },
+  getHeadYCoord: function(){
+    return this.head.getCoord()[1];
+  },
+  hasCollidedHorizontally : function(initialLimit,finalLimit){
+    let headPos = this.getHeadXCoord();
+    return headPos <= initialLimit || headPos >= finalLimit;
+  },
+  hasCollidedVertically : function(initialLimit,finalLimit){
+    let headPos = this.getHeadYCoord();
+    return headPos <= initialLimit || headPos >= finalLimit;
   }
 }

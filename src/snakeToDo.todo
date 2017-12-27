@@ -1,0 +1,6 @@
+todo
+  1) check for horizontal collision
+  2) check for vertical collision
+  3) check for collision with itself;
+
+  4) if collision happens then stop game and give chance to restart.

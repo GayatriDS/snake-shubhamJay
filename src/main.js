@@ -5,6 +5,24 @@ let numberOfCols=120;
 
 let animator=undefined;
 
+
+const hasSnakeCollidedHori = function(snake){
+  return snake.hasCollidedHorizontally(0,numberOfCols);
+};
+
+const hasSnakeCollidedVert = function(snake){
+  return snake.hasCollidedVertically(0,numberOfRows);
+};
+
+const isGameOver = function(){
+  return hasSnakeCollidedHori(snake) || hasSnakeCollidedVert(snake);
+};
+
+const stopGame = function(){
+  clearInterval(animator);
+
+}
+
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
@@ -16,7 +34,11 @@ const animateSnake=function() {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
-  }
+  };
+  console.log(snake.body);
+  if(isGameOver(snake)){
+    stopGame();
+  };
 }
 
 const changeSnakeDirection=function(event) {
