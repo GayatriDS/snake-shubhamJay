@@ -38,17 +38,17 @@ Snake.prototype={
     let headPos = this.getHeadYCoord();
     return headPos <= initialLimit || headPos >= finalLimit;
   },
-  getBodyXCoords : function(){
-    return this.body.map((ele)=>ele.x)
-  },
-  getBodyYCoords : function(){
-    return this.body.map((ele)=>ele.y);
+  getBodyCoords : function(){
+    return this.body.map((ele)=>[ele.x,ele.y])
   },
   isEatingItself : function(){
-    let bodyXCoords = this.getBodyXCoords();
-    let bodyYCoords = this.getBodyYCoords();
-    let headXCoords = this.getHeadXCoord();
-    let headYCoords = this.getHeadYCoord();
-    return bodyXCoords.includes(headXCoords) && bodyYCoords.includes(headYCoords);
-  }
+    let bodyCoords = this.getBodyCoords();
+    let headCoords = this.getHead();
+    let headPos = [headCoords.x,headCoords.y];
+    let areSameCoords = this.isSame.bind(null,headPos);
+    return bodyCoords.some(areSameCoords);
+  },
+  isSame : function(headPos,bodyElement){
+     return bodyElement[0] == headPos[0] && bodyElement[1] == headPos[1];
+  };
 }
