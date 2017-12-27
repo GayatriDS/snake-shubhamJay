@@ -18,10 +18,29 @@ const isGameOver = function(){
   return hasSnakeCollidedHori(snake) || hasSnakeCollidedVert(snake);
 };
 
+const getBody  = function(){
+  return document.getElementById("gameBody");
+};
+
+const createRestarButton = function(){
+  let button = document.createElement("button");
+  button.innerText = "Restart Game";
+  button.id = "restartButton";
+  button.addEventListener("click",restartGame);
+  return restartGame;
+};
+
+const giveChanceToPlayAgain = function () {
+  let body = getBody();
+  console.log(body);
+  let restartButton = createRestarButton();
+  body.appendChild(restartButton);
+};
+
 const stopGame = function(){
   clearInterval(animator);
-
-}
+  giveChanceToPlayAgain();
+};
 
 const animateSnake=function() {
   let oldHead=snake.getHead();
@@ -35,7 +54,7 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   };
-  console.log(snake.body);
+  // console.log(snake.body);
   if(isGameOver(snake)){
     stopGame();
   };
@@ -75,6 +94,11 @@ const createSnake=function() {
 const createFood=function(numberOfRows,numberOfCols) {
   food=generateRandomPosition(numberOfCols,numberOfRows);
 }
+
+const restartGame = function(){
+  document.location.reload();
+  // startGame();
+};
 
 const startGame=function() {
   createSnake();
