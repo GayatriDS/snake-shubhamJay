@@ -44,8 +44,12 @@ const showButtonToPlayAgain = function () {
   body.appendChild(restartButton);
 };
 
-const stopGame = function(){
+const stopSnakeMotion = function(){
   clearInterval(animator);
+};
+
+const stopGame = function(){
+  stopSnakeMotion();
   showButtonToPlayAgain();
 };
 
@@ -103,7 +107,6 @@ const createFood=function(numberOfRows,numberOfCols) {
 
 const restartGame = function(){
   document.location.reload();
-  // startGame();
 };
 
 const startGame=function() {

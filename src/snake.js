@@ -42,13 +42,12 @@ Snake.prototype={
     return this.body.map((ele)=>[ele.x,ele.y])
   },
   isEatingItself : function(){
-    let bodyCoords = this.getBodyCoords();
+    let bodyCoords = this.getBody();
     let headCoords = this.getHead();
-    let headPos = [headCoords.x,headCoords.y];
-    let areSameCoords = this.isSame.bind(null,headPos);
+    let areSameCoords = this.isSame.bind(null,headCoords);
     return bodyCoords.some(areSameCoords);
   },
   isSame : function(headPos,bodyElement){
-     return bodyElement[0] == headPos[0] && bodyElement[1] == headPos[1];
-  };
+     return bodyElement.isSameCoordAs(headPos);
+  }
 }
