@@ -37,5 +37,18 @@ Snake.prototype={
   hasCollidedVertically : function(initialLimit,finalLimit){
     let headPos = this.getHeadYCoord();
     return headPos <= initialLimit || headPos >= finalLimit;
+  },
+  getBodyXCoords : function(){
+    return this.body.map((ele)=>ele.x)
+  },
+  getBodyYCoords : function(){
+    return this.body.map((ele)=>ele.y);
+  },
+  isEatingItself : function(){
+    let bodyXCoords = this.getBodyXCoords();
+    let bodyYCoords = this.getBodyYCoords();
+    let headXCoords = this.getHeadXCoord();
+    let headYCoords = this.getHeadYCoord();
+    return bodyXCoords.includes(headXCoords) && bodyYCoords.includes(headYCoords);
   }
 }

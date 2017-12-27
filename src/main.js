@@ -7,15 +7,23 @@ let animator=undefined;
 
 
 const hasSnakeCollidedHori = function(snake){
-  return snake.hasCollidedHorizontally(0,numberOfCols);
+  return snake.hasCollidedHorizontally(0,numberOfCols-1);
 };
 
 const hasSnakeCollidedVert = function(snake){
-  return snake.hasCollidedVertically(0,numberOfRows);
+  return snake.hasCollidedVertically(0,numberOfRows-1);
 };
 
-const isGameOver = function(){
+const hasSnakeCollidedWall = function(snake){
   return hasSnakeCollidedHori(snake) || hasSnakeCollidedVert(snake);
+};
+
+const hasSnakeEatenItself = function(snake){
+  return snake.isEatingItself();
+}
+
+const isGameOver = function(snake){
+  return hasSnakeCollidedWall(snake) || hasSnakeEatenItself(snake);
 };
 
 const getBody  = function(){
@@ -27,19 +35,18 @@ const createRestarButton = function(){
   button.innerText = "Restart Game";
   button.id = "restartButton";
   button.addEventListener("click",restartGame);
-  return restartGame;
+  return button;
 };
 
-const giveChanceToPlayAgain = function () {
+const showButtonToPlayAgain = function () {
   let body = getBody();
-  console.log(body);
   let restartButton = createRestarButton();
   body.appendChild(restartButton);
 };
 
 const stopGame = function(){
   clearInterval(animator);
-  giveChanceToPlayAgain();
+  showButtonToPlayAgain();
 };
 
 const animateSnake=function() {
@@ -54,7 +61,6 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   };
-  // console.log(snake.body);
   if(isGameOver(snake)){
     stopGame();
   };

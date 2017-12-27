@@ -28,4 +28,6 @@
 #restartButton{
   width: 150px;
   height: 30px;
+  margin-top: 30px;
+  margin-left: 45%;
 }
